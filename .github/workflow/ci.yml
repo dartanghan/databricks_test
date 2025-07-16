@@ -1,0 +1,20 @@
+name: Deployer
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: 'update repo folder'
+    environment: dev
+    env:
+      DATABRICKS_AUTH_TYPE: github_oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - name:
+        run: databricks repos update /Workspace/Repos/dartanghan@gmail.com --branch main
