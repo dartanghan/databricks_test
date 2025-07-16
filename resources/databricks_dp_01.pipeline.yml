@@ -1,4 +1,3 @@
-# The main pipeline for databricks_dp_01
 resources:
   pipelines:
     databricks_dp_01_pipeline:

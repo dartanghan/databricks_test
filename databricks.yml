@@ -23,13 +23,14 @@ targets:
     default: true
     workspace:
       host: https://adb-2021064944982093.13.azuredatabricks.net
+      root_path: /Workspace/Repos/dartanghan@gmail.com/.bundle/${bundle.name}/${bundle.target}
     # cluster_id: 
 
   prod:
     mode: production
     workspace:
       host: https://adb-2021064944982093.13.azuredatabricks.net
-      # We explicitly deploy to /Workspace/Users/dartanghan@bouwen.com.br to make sure we only have a single copy.
+      # We explicitly deploy to /Workspace/Users/<USER>
       root_path: /Workspace/Users/dartanghan@bouwen.com.br/.bundle/${bundle.name}/${bundle.target}
     permissions:
       - user_name: dartanghan@bouwen.com.br

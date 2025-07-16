@@ -1,11 +1,10 @@
-# The main job for databricks_dp_01.
 resources:
   jobs:
     databricks_dp_01_job:
       name: databricks_dp_01_job
 
       trigger:
-        # Run this job every day, exactly one day from the last run; see https://docs.databricks.com/api/workspace/jobs/create#trigger
+        # https://docs.databricks.com/api/workspace/jobs/create#trigger
         periodic:
           interval: 2
           unit: DAYS
@@ -35,12 +34,9 @@ resources:
             package_name: databricks_dp_01
             entry_point: main
 
-      # A list of task execution environment specifications that can be referenced by tasks of this job.
+      # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
       environments:
         - environment_key: default
-
-          # Full documentation of this spec can be found at:
-          # https://docs.databricks.com/api/workspace/jobs/create#environments-spec
           spec:
             client: "2"
             dependencies:
