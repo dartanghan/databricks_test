@@ -55,6 +55,13 @@ databricks account service-principals list
 
 
 
+# TL;DR
+# - Create the service principal using account panel
+# - Grant access to the workspace thru account panel
+# - Add service-principal-federation-policy for it using command line
+# - Give shared managed permission to the service principal inside workspace explorer tool in workspace
+
+
 
 
 # databricks_dp_01
