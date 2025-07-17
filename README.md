@@ -10,6 +10,12 @@ ACCOUNT_URL=https://accounts.azuredatabricks.net/
 # databrick cli. Otherwise we will not be able to get the users or accesses.
 ##
 
+# in https://accounts.azuredatabricks.net/ create a service principal
+# user management > Service principals > add service principal
+# then add permission to the new principal in the desired workspace
+# workspaces > [select the desired workspace] > Permissions > Add Permission
+
+
 # --- Add a service principal
 # https://accounts.azuredatabricks.net/user-management/serviceprincipals?account_id=870b9035-b999-4ae5-9fba-c6c5e4b487d8
 # Use Microsoft Entra ID or Databricks Managed
@@ -22,35 +28,32 @@ UUID: b174f39f-1565-45df-847b-9229efcef16c
 # Before execute this command, grab the user id using:
 # databricks account service-principals list  
 # In our case 147882943814739  b174f39f-1565-45df-847b-9229efcef16c  githubaction    ACTIVE
+# ISSUER: URL OF GITHUB 
+# AUDIENCES: optional
+# SUBJECT: desired repo, may define a specific branch
+
 databricks account service-principal-federation-policy create 147882943814739  --json '{
   "oidc_policy": {
     "issuer": "https://token.actions.githubusercontent.com",
     "audiences": [
         "https://github.com/dartanghan/databricks_test"
     ],
-    "subject": "repo:github.com/dartanghan/databricks_test:environment:dev"
+    "subject": "repo:dartanghan/databricks_test:environment:dev"
   }  
 }'
 
-
-
-
-
+### 
+# When configuring github actions:
+# DATABRICKS_AUTH_TYPE: github-oidc # hardcoded
+# DATABRICKS_HOST: https://adb-2021064944982093.13.azuredatabricks.net/ # workspace URL
+# DATABRICKS_CLIENT_ID: b174f39f-1565-45df-847b-9229efcef16c # service principal uuid
+# 
+# Useful commands
+databricks account service-principal-federation-policy list 147882943814739
 databricks auth login --host https://accounts.azuredatabricks.net/ --account-id 870b9035-b999-4ae5-9fba-c6c5e4b487d8
 databricks account service-principals list  
 
-databricks auth login --host https://adb-1234556789.13.azuredatabricks.net --account-id 1234556789
 
-
-databricks account federation-policy create --json '{
-  "oidc_policy": {
-    "issuer": "https://token.actions.githubusercontent.com",
-    "audiences": [
-        "https://github.com/dartanghan/databricks_test"
-    ],
-    "subject_claim": "repo:github.com/dartanghan/databricks_test:environment:dev"
-  }  
-}'
 
 
 
