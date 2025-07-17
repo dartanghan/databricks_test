@@ -63,6 +63,16 @@ databricks account service-principals list
 
 
 
+databricks account service-principal-federation-policy create 147882943814739  --json '{
+  "oidc_policy": {
+    "issuer": "https://token.actions.githubusercontent.com",
+    "audiences": [
+        "https://github.com/dartanghan/databricks_test"
+    ],
+    "subject": "repo:dartanghan/databricks_test:ref:refs/heads/main"
+  }  
+}'
+
 
 # databricks_dp_01
 
