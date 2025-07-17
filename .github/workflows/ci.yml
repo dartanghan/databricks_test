@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
-      - name: Run update Repo
-        run: databricks repos update /Workspace/Repos/dartanghan@bouwen.com.br/databricks_test --branch main
       - name: Run update Shared
         run: databricks repos update /Workspace/Shared/databricks_test --branch main
+      - name: Run update Repo
+        run: databricks repos update /Workspace/Repos/dartanghan@bouwen.com.br/databricks_test --branch main
