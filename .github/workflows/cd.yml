@@ -13,17 +13,14 @@ jobs:
   deploy_bundle:
     runs-on: ubuntu-latest
     name: 'deploy bundle'
-    env:
-      DATABRICKS_AUTH_TYPE: github-oidc
-      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
     steps:
-      - uses: databricks/setup-cli@main
-      - uses: astral-sh/setup-uv@v1
       - uses: actions/checkout@v4
-      - name: Deploy Bundle
-        run: | 
-          ls -lart
-          pwd
-          databricks bundle deploy -t dev
+      - uses: databricks/setup-cli@main
+      # - uses: astral-sh/setup-uv@v1
+      - run: databricks bundle deploy
         working-directory: .
+        env:
+          DATABRICKS_AUTH_TYPE: github-oidc
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
+          DATABRICKS_BUNDLE_ENV: dev
