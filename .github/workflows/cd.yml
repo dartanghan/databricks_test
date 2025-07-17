@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
-      # - uses: astral-sh/setup-uv@v1
+      - uses: astral-sh/setup-uv@main
       - run: databricks bundle deploy
         working-directory: .
         env:
