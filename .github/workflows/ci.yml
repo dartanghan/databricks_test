@@ -11,10 +11,11 @@ jobs:
     name: 'update repo folder'
     environment: dev
     env:
-      DATABRICKS_AUTH_TYPE: github_oidc
+      DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
-      - name:
+      - name: Run update
         run: databricks repos update /Workspace/Repos/dartanghan@gmail.com --branch main
