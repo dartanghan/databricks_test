@@ -18,9 +18,12 @@ jobs:
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
       DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
     steps:
-      - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
       - uses: astral-sh/setup-uv@v1
+      - uses: actions/checkout@v4
       - name: Deploy Bundle
-        run: databricks bundle deploy -t dev
+        run: | 
+          ls -lart
+          pwd
+          databricks bundle deploy -t dev
         working-directory: .
