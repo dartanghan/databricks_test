@@ -10,9 +10,9 @@ permissions:
   contents: read  # Required to checkout code
 
 jobs:
-  update_repo:
+  deploy_bundle:
     runs-on: ubuntu-latest
-    name: 'update repo folder'
+    name: 'deploy bundle'
     environment: dev
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
@@ -21,7 +21,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
-      - name: Run update Repo
-        run: databricks repos update /Workspace/Repos/dartanghan@bouwen.com.br/databricks_test --branch main
-      - name: Run update Shared
-        run: databricks repos update /Workspace/Shared/databricks_test --branch main
+      - name: Deploy Bundle
+        run: databricks bundle deploy
