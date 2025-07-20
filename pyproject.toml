@@ -1,7 +1,7 @@
 [project]
 name = "databricks_dp_01"
 version = "0.0.1"
-authors = [{ name = "dartanghan@bouwen.com.br" }]
+authors = [{ name = "me@dartanghan.com.br" }]
 requires-python = ">= 3.11"
 
 [project.optional-dependencies]

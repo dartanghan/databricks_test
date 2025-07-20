@@ -11,9 +11,9 @@ resources:
 
       email_notifications:
         on_failure:
-          - dartanghan@bouwen.com.br
+          - dartanghan.vani@thoughtworks.com
         on_success:
-          - dartanghan@bouwen.com.br
+          - dartanghan.vani@thoughtworks.com
 
       tasks:
         - task_key: notebook_task
