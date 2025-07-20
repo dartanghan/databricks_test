@@ -19,13 +19,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: databricks/setup-cli@main
       - uses: astral-sh/setup-uv@main
-      - run: databricks bundle deploy  -t qa
+      - run: databricks bundle deploy
         working-directory: .
         env:
           DATABRICKS_AUTH_TYPE: github-oidc
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
-          DATABRICKS_BUNDLE_ENV: dev
+          DATABRICKS_BUNDLE_ENV: qa
   run_bundle_qa:
     runs-on: ubuntu-latest
     name: 'run bundle in QA'
