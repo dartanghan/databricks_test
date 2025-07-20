@@ -1,0 +1,45 @@
+name: Deployer_QA
+
+on:
+  workflow_run:
+    workflows: ["Deployer"]
+    branches: [main]
+    types: 
+      - completed
+
+permissions:
+  id-token: write # Required for OIDC authentication
+  contents: read  # Required to checkout code
+
+jobs:
+  deploy_bundle_qa:
+    runs-on: ubuntu-latest
+    name: 'deploy bundle in QA'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - uses: astral-sh/setup-uv@main
+      - run: databricks bundle deploy  -t qa
+        working-directory: .
+        env:
+          DATABRICKS_AUTH_TYPE: github-oidc
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
+          DATABRICKS_BUNDLE_ENV: dev
+  run_bundle_qa:
+    runs-on: ubuntu-latest
+    name: 'run bundle in QA'
+    needs:
+      - deploy_bundle_qa
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      - uses: astral-sh/setup-uv@main
+      - run: databricks bundle run databricks_dp_01_job -t qa
+        working-directory: .
+        env:
+          DATABRICKS_AUTH_TYPE: github-oidc
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}      
+          DATABRICKS_BUNDLE_ENV: dev
+
