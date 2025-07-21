@@ -1,8 +1,7 @@
 # --- Get your account_id
-# https://accounts.azuredatabricks.net/user-management/users/6895889749198589?account_id=870b9035-b999-4ae5-9fba-c6c5e4b487d8
-# databricks auth login --host https://accounts.azuredatabricks.net/ --account-id 870b9035-b999-4ae5-9fba-c6c5e4b487d8
-ACCOUNT_ID=6895889749198589
-ACCOUNT_UUID=870b9035-b999-4ae5-9fba-c6c5e4b487d8 ( used for some commands )
+# https://accounts.azuredatabricks.net/user-management/users/236895889749?account_id=870b9035-b999-4ae5-9fba-c6c5e4b487d822
+# databricks auth login --host https://accounts.azuredatabricks.net/ --account-id 870b9035-b999-4ae5-9fba-a555ACCOUNT_ID=23689588974922
+ACCOUNT_UUID=870b9035-a555-4ae5-9fba-c6c5e4b487d8 ( used for some commands )
 ACCOUNT_URL=https://accounts.azuredatabricks.net/ 
 
 ##
@@ -20,19 +19,19 @@ ACCOUNT_URL=https://accounts.azuredatabricks.net/
 # https://accounts.azuredatabricks.net/user-management/serviceprincipals?account_id=870b9035-b999-4ae5-9fba-c6c5e4b487d8
 # Use Microsoft Entra ID or Databricks Managed
 Service Principal: githubaction 
-ID: 147882943814739
-UUID: b174f39f-1565-45df-847b-9229efcef16c
+ID: 14788876567898765
+UUID: b174f39f-1413-88ff-847b-9229efcef16c
 # Configure it as admin
 
 # Create the service principal used by databricks
 # Before execute this command, grab the user id using:
 # databricks account service-principals list  
-# In our case 147882943814739  b174f39f-1565-45df-847b-9229efcef16c  githubaction    ACTIVE
+# In our case 14788876567898765  b174f39f-1413-88ff-847b-9229efcef16c  githubaction    ACTIVE
 # ISSUER: URL OF GITHUB 
 # AUDIENCES: optional
 # SUBJECT: desired repo, may define a specific branch
 
-databricks account service-principal-federation-policy create 147882943814739  --json '{
+databricks account service-principal-federation-policy create 14788876567898765  --json '{
   "oidc_policy": {
     "issuer": "https://token.actions.githubusercontent.com",
     "audiences": [
@@ -46,10 +45,10 @@ databricks account service-principal-federation-policy create 147882943814739  -
 # When configuring github actions:
 # DATABRICKS_AUTH_TYPE: github-oidc # hardcoded
 # DATABRICKS_HOST: https://adb-2021064944982093.13.azuredatabricks.net/ # workspace URL
-# DATABRICKS_CLIENT_ID: b174f39f-1565-45df-847b-9229efcef16c # service principal uuid
+# DATABRICKS_CLIENT_ID: b174f39f-1413-88ff-847b-9229efcef16c # service principal uuid
 # 
 # Useful commands
-databricks account service-principal-federation-policy list 147882943814739
+databricks account service-principal-federation-policy list 14788876567898765
 databricks auth login --host https://accounts.azuredatabricks.net/ --account-id 870b9035-b999-4ae5-9fba-c6c5e4b487d8
 databricks account service-principals list  
 
@@ -63,7 +62,7 @@ databricks account service-principals list
 
 
 
-databricks account service-principal-federation-policy create 147882943814739  --json '{
+databricks account service-principal-federation-policy create 14788876567898765  --json '{
   "oidc_policy": {
     "issuer": "https://token.actions.githubusercontent.com",
     "audiences": [
